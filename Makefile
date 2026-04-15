@@ -27,8 +27,9 @@ epub: $(CHAPTERS) $(METADATA) | $(BUILD_DIR)
 install-dependencies:
 	@echo "Installing dependencies..."
 	sudo apt-get update
-	sudo apt-get install pandoc texlive
+	sudo apt-get install pandoc texlive qpdf
 
 pdf: $(CHAPTERS) $(METADATA) | $(BUILD_DIR)
 	@echo "Generating PDF..."
 	pandoc $(CHAPTERS) -o $(BUILD_DIR)/$(BOOK_NAME).pdf $(PANDOC_FLAGS) $(PDF_FLAGS)
+	qpdf --empty --pages $(BUILD_DIR)/$(BOOK_NAME).pdf 2,1,3-z -- $(BUILD_DIR)/$(BOOK_NAME).pdf
