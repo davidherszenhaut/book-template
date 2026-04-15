@@ -31,5 +31,6 @@ install-dependencies:
 
 pdf: $(CHAPTERS) $(METADATA) | $(BUILD_DIR)
 	@echo "Generating PDF..."
-	pandoc $(CHAPTERS) -o $(BUILD_DIR)/$(BOOK_NAME).pdf $(PANDOC_FLAGS) $(PDF_FLAGS)
-	qpdf --empty --pages $(BUILD_DIR)/$(BOOK_NAME).pdf 2,1,3-z -- $(BUILD_DIR)/$(BOOK_NAME).pdf
+	pandoc $(CHAPTERS) -o $(BUILD_DIR)/$(BOOK_NAME)-pre.pdf $(PANDOC_FLAGS) $(PDF_FLAGS)
+	qpdf --empty --pages $(BUILD_DIR)/$(BOOK_NAME)-pre.pdf 2,1,3-z -- $(BUILD_DIR)/$(BOOK_NAME).pdf
+	rm $(BUILD_DIR)/$(BOOK_NAME)-pre.pdf
